@@ -9,4 +9,5 @@ class ModelPessoa extends Model
 {
     use HasFactory;
     protected $fillable=['nome','cpf','email','data_nasc','nacionalidade'];
+    protected $primaryKey='id';
 }

@@ -7,32 +7,12 @@ use App\Models\ModelPessoa;
 
 class CrudController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
-
-   // private $objPessoa;
-    
-
-    //public function __construct()
-    //{
-    //    $this->objPessoa=new ModelPessoa();
-   // }
-    public function index()
+ public function index()
     {
 
         return view(view:'index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view(view:'create');
@@ -40,12 +20,7 @@ class CrudController extends Controller
         
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         ModelPessoa::create([
@@ -55,52 +30,44 @@ class CrudController extends Controller
             'data_nasc' =>$request->data_nasc,
             'nacionalidade' =>$request->nacionalidade
         ]);
+        
+
         return "Cadastro feito com sucesso!!";
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show()
     {
         $pessoas = ModelPessoa::all();
         return view('show', ['pessoas' => $pessoas]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit($id)
     {
-        //
+        $pessoa = ModelPessoa::findOrFail($id);
+        return view('edit',['pessoa'=>$pessoa]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
-    {
-        //
+    {    
+        $pessoa = ModelPessoa::findOrFail($id);
+        $pessoa->update([
+            'nome' =>$request->nome,
+            'cpf' =>$request->cpf,
+            'email' =>$request->email,
+            'data_nasc' =>$request->data_nasc,
+            'nacionalidade' =>$request->nacionalidade
+        ]);
+        return "Cadastro atualizado com sucesso!!";
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+       $pessoa=ModelPessoa::findOrFail($id);
+       $pessoa->delete();
+       return "Cadastro excluido com sucesso.";
     }
 }

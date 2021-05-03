@@ -21,3 +21,6 @@ Route::get('/', [CrudController::class, 'index'])->name('user.index');
 Route::get('/cadastro', [CrudController::class, 'create'])->name('create');
 Route::post('/cadastro',[CrudController::class, 'store'])->name('salvar_pessoa');
 Route::get('/show',[CrudController::class, 'show'])->name('show_pessoa');
+Route::get('/del/{id}',[CrudController::class, 'destroy'])->name('destroy_pessoa');
+Route::get('/edit/{id}',[CrudController::class, 'edit'])->name('edit_pessoa');
+Route::post('/edit/{id}',[CrudController::class, 'update'])->name('update_pessoa');
