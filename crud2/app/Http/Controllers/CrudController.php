@@ -22,11 +22,18 @@ class CrudController extends Controller
     public function store(Request $request)
     {
         ModelPessoa::create(
+          
         
             $request->all ()
             
         );
-           
+        $request->validate([
+            'nome' => 'required',
+            'cpf' => 'required',
+            'email' => 'required',
+            'data_nasc' => 'required',
+            'nacionalidade' => 'required',
+        ]);
 
         return "Cadastro feito com sucesso!!";
     }
